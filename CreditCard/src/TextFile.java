@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -11,16 +13,27 @@ public class TextFile
 			
 				
 				
-				Scanner myFile = new Scanner(new File("Cards"));
-				//ArrayList <Card> studentList = new ArrayList<Card>();
-		
-		while(myFile.hasNext())
+				//Scanner myFile = new Scanner(new File("Cards"));
+				ArrayList <Integer> cardList = new ArrayList<>();
+				String filePath = "Cards";
+		try(Scanner scanner = new Scanner(new File(filePath)))
+		{
+		while(scanner.hasNext())
 			{
-				String cardNumbers = myFile.nextLine();
-				//System.out.println(cardNumbers);
-			}
-				
-			}
+				cardList.add(scanner.nextInt());
+			
+			}		
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("File not found: " + e);
+		}
+		
+		for(int i = 0; i < cardList.size(); i++)
+		{
+			System.out.println(cardList.get(i));
+		}
+		}
 		
 		
 		
