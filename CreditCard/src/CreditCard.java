@@ -1,51 +1,57 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.io.File;
 
 public class CreditCard
 	{
 	static int total = 0;
+	static ArrayList <Long> cardList = new ArrayList<>();
 
 		public static void main(String[] args) throws IOException
 			{
-				//TextFile.readCards();
-				doubleDigits();
-				validateCard();
+				TextFile.readCards();
+				for(int q = 0; q < cardList.size(); q++ )
+					{
+						total = 0;
+						doubleDigits();
+						validateCard();
+					}
+				
 
 			}
 		
 		public static void doubleDigits()
 		{
 			
-			int[] card = {5,4,2,4,1,8,0,1,2,3,4,5,6,7,8,9};
-			int value;
+			//ArrayList <Integer> cardList = {5,4,2,4,1,8,0,1,2,3,4,5,6,7,8,9};
+			
+			long value;
 			
 			
-			for(int i = 0; i < card.length; i+=2)
+			for(int i = 0; i < cardList.size(); i+=2)
 			{
-					value = card[i]*2;
-					//System.out.print(value);
-					card[i] = value;
+					value = cardList.get(i)*2;
+					cardList.set(i, value);
 					
 					
-					if(card[i] > 9)
+					if(cardList.get(i) > 9)
 					{
-						int sum = 0;
-						String cardString = String.valueOf(card[i]);
+						long sum = 0;
+						String cardString = String.valueOf(cardList.get(i));
 						for(int s = 0; s < cardString.length(); s++)
 						{
 							sum += Integer.parseInt(String.valueOf(cardString.charAt(s)));
-						card[i] = sum;
-						}
 						
+						}
+						cardList.set(i,  sum);
 					}
 				
 			}
-			System.out.print(" ");
-			for(int k = 0; k < card.length; k++)
-			{
-				//System.out.print(card[k]);
-				total += card[k];
-			}
+			//System.out.print(" ");
+			for(long nums: cardList)
+				{
+					total += nums;
+				}
 			System.out.print("");
 			
 		}
@@ -60,7 +66,7 @@ public class CreditCard
 			 }
 			 else
 			 {
-			 
+				 realCard = false;
 			 }
 			 System.out.print(realCard);
 			  
