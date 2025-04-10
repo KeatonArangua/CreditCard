@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.File;
 
 public class CreditCard
 	{
@@ -22,7 +23,7 @@ public class CreditCard
 			for(int i = 0; i < card.length; i+=2)
 			{
 					value = card[i]*2;
-					System.out.print(value);
+					//System.out.print(value);
 					card[i] = value;
 					
 					
@@ -42,10 +43,10 @@ public class CreditCard
 			System.out.print(" ");
 			for(int k = 0; k < card.length; k++)
 			{
-				System.out.print(card[k]);
+				//System.out.print(card[k]);
 				total += card[k];
 			}
-			System.out.print(" ");
+			System.out.print("");
 			
 		}
 		 public static void validateCard()
