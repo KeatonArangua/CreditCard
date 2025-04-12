@@ -8,7 +8,6 @@ public class CreditCard
 	{
 	
 	static ArrayList <Long> cardList = new ArrayList<>();
-	static int total = 0;
 	static int counter = 0;
 
 		public static void main(String[] args) throws IOException
@@ -16,10 +15,11 @@ public class CreditCard
 				readCards();
 				for(Long credit: cardList)
 				{
-					int total = 0;
-					doubleDigits();
-					validateCard();
-					System.out.println();
+					if(validateCard(credit))
+					{
+						counter++;
+					}
+				
 				}
 				System.out.print("There are " + counter + " valid card numbers!");
 					
@@ -39,57 +39,38 @@ public class CreditCard
 					cardList.add(number);
 					
 				}
+			myFile.close();
 		}
-		
-		
-		public static void doubleDigits()
-		{
-			long value;
-			
-			
-			for(int i = 0; i < cardList.size(); i+=2)
-			{
-					value = cardList.get(i)*2;
-					cardList.set(i, value);
-					
-					
-					if(cardList.get(i) > 9)
-					{
-						long sum = 0;
-						String cardString = String.valueOf(cardList.get(i));
-						for(int s = 0; s < cardString.length(); s++)
-						{
-							sum += Integer.parseInt(String.valueOf(cardString.charAt(s)));
-						
-						}
-						cardList.set(i,  sum);
-					}
-				
-			}
-			//System.out.print(" ");
-			for(long nums: cardList)
-				{
-					total += nums;
-				}
-			System.out.print("");
-			
-		}
-		 public static void validateCard()
+		 public static boolean validateCard(Long cardNumber)
 		 {
-			 boolean realCard = false;
+			 String cardStr = Long.toString(cardNumber);
+			 int total = 0;
+			 boolean doubleIt = false;
+			 
+			 for(int i = cardStr.length()-1; i >= 0; i--)
+			 {
+				 int digit = Character.getNumericValue(cardStr.charAt(i));
+				 
+				 if(doubleIt)
+				 {
+					 digit *=2;
+					 
+					 if(digit > 9)
+					 {
+						 digit -= 9;
+					 }
+				 }
+				 
+			total += digit;
+			doubleIt = !doubleIt;
+				 
+			 }
 			 
 			
-			if(total % 10 == 0)
-			 {
-				 realCard = true;
-				 counter++;
-			 }
-			 else
-			 {
-				 realCard = false;
-			 }
-			 System.out.print(realCard);
+		return total % 10 == 0;
+		}
+			 
 			  
-		 }
+}
 			
-	}
+	
