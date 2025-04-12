@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class TextFile
 	{
-
+	static  ArrayList <Long> cardList = new ArrayList<>();
 		public static void readCards() throws IOException
 		{
 			
 				
 				
 				Scanner myFile = new Scanner(new File("Cards"));
-				ArrayList <Long> cardList = new ArrayList<>();
+				
 	
 		while(myFile.hasNext())
 			{

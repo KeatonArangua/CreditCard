@@ -1,30 +1,49 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class CreditCard
 	{
-	static int total = 0;
+	
 	static ArrayList <Long> cardList = new ArrayList<>();
+	static int total = 0;
+	static int counter = 0;
 
 		public static void main(String[] args) throws IOException
 			{
-				TextFile.readCards();
-				for(int q = 0; q < cardList.size(); q++ )
-					{
-						total = 0;
-						doubleDigits();
-						validateCard();
-					}
+				readCards();
+				for(Long credit: cardList)
+				{
+					int total = 0;
+					doubleDigits();
+					validateCard();
+					System.out.println();
+				}
+				System.out.print("There are " + counter + " valid card numbers!");
+					
+			}
 				
 
-			}
+			
+		public static void readCards() throws IOException 
+		{
+			Scanner myFile = new Scanner(new File("Cards"));
+					
+		
+			while(myFile.hasNext())
+				{
+					String cardNumber = myFile.nextLine();
+					long number = Long.parseLong(cardNumber);
+					cardList.add(number);
+					
+				}
+		}
+		
 		
 		public static void doubleDigits()
 		{
-			
-			//ArrayList <Integer> cardList = {5,4,2,4,1,8,0,1,2,3,4,5,6,7,8,9};
-			
 			long value;
 			
 			
@@ -63,6 +82,7 @@ public class CreditCard
 			if(total % 10 == 0)
 			 {
 				 realCard = true;
+				 counter++;
 			 }
 			 else
 			 {
