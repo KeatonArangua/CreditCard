@@ -18,8 +18,12 @@ public class CreditCard
 					if(validateCard(credit))
 					{
 						counter++;
+						System.out.println("The card number " + credit + " is potentially valid!");
 					}
-				
+					else
+						{
+							System.out.println("The card number " + credit + " is not potentially valid!");
+						}
 				}
 				System.out.print("There are " + counter + " valid card numbers!");
 					
